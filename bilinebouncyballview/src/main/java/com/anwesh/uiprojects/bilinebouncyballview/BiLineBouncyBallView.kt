@@ -184,4 +184,23 @@ class BiLineBouncyBallView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : BiLineBouncyBallView) {
+
+        private val animator : Animator = Animator(view)
+        private val blbb : BiLineBouncyBall = BiLineBouncyBall(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            animator.animate {
+                blbb.draw(canvas, paint)
+            }
+        }
+
+        fun handleTap() {
+            blbb.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
