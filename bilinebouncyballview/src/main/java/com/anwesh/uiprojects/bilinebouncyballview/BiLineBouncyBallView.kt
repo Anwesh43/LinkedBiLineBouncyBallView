@@ -48,6 +48,7 @@ fun Canvas.drawBLBBNode(i : Int, scale : Float, paint : Paint) {
     paint.strokeWidth = Math.min(w, h) / strokeFactor
     save()
     translate(gap * (i + 1), h / 2)
+    drawLine(-size, 0f, size, 0f, paint)
     for (j in 0..(lines - 1)) {
         drawBiLineBouncyBall(j, size, scale, paint)
     }
@@ -193,8 +194,11 @@ class BiLineBouncyBallView(ctx : Context) : View(ctx) {
 
         fun render(canvas : Canvas, paint : Paint) {
             canvas.drawColor(backColor)
+            blbb.draw(canvas, paint)
             animator.animate {
-                blbb.draw(canvas, paint)
+               blbb.update {
+                   animator.stop()
+               }
             }
         }
 
