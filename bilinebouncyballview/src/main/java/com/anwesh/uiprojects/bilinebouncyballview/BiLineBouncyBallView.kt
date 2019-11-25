@@ -203,4 +203,13 @@ class BiLineBouncyBallView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : BiLineBouncyBallView {
+            val view : BiLineBouncyBallView = BiLineBouncyBallView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
